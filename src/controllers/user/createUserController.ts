@@ -11,7 +11,7 @@ const createUserController = async (
 
   const createdUser = await createUserService(data);
 
-  return res.status(200).json(createdUser);
+  return res.status(201).json(createdUser);
 };
 
 export default createUserController;
