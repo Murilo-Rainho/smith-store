@@ -14,7 +14,7 @@ const createOrderController = async (
 
     const allOrders = await createOrderService(tokenData, products);
 
-    return res.status(200).json(allOrders);
+    return res.status(201).json({ order: allOrders });
   } catch (error) {
     next(error);
   }
