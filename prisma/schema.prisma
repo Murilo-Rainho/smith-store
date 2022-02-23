@@ -21,8 +21,8 @@ model Users {
 
 model Orders {
   id              Int         @id @default(autoincrement())
-  userId          Int
-  Users           Users       @relation(fields: [userId], references: [id])
+  userId          Int?
+  Users           Users?       @relation(fields: [userId], references: [id])
   product         Products[]
 }
 
@@ -30,6 +30,6 @@ model Products {
   id              Int         @id @default(autoincrement())
   name            String      @db.Text()
   amount          String      @db.Text()
-  orderId         Int
-  Orders          Orders      @relation(fields: [orderId], references: [id])
+  orderId         Int?
+  Orders          Orders?      @relation(fields: [orderId], references: [id])
 }
