@@ -1,2 +1,2 @@
 export { default as createProductService } from './createProductService';
-export default () => {};
+export { default as getAllProductsService } from './getAllProductsService';
