@@ -30,15 +30,19 @@ const validateDataUserPost = (
   res: Response,
   next: NextFunction,
 ) => {
-  const data = req.body;
-
-  const { error } = userDataSchema.validate(data);
-
-  const statusCode = error?.message.match(/is required/i) ? 400 : 422;
-
-  if (error) return res.status(statusCode).json({ error: error.message });
-
-  next();
+  try {
+    const data = req.body;
+  
+    const { error } = userDataSchema.validate(data);
+  
+    const statusCode = error?.message.match(/is required/i) ? 400 : 422;
+  
+    if (error) return res.status(statusCode).json({ error: error.message });
+  
+    next();
+  } catch (error) {
+    next(error);
+  }
 };
 
 export default validateDataUserPost;
