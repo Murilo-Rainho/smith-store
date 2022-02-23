@@ -5,3 +5,5 @@ export { default as User } from './User';
 export { default as Login } from './Login';
 export { default as NewProduct } from './NewProduct';
 export { default as Product } from './Product';
+export { default as NewOrder } from './NewOrder';
+export { default as Order } from './Order';

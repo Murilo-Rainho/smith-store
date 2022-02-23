@@ -5,7 +5,7 @@ const createToken = (username: string) => {
   // Here, it's only out, for study reasons.
   const secret = 'mySuperSecret';
 
-  const token = jwt.sign({ data: username }, secret);
+  const token = jwt.sign(username, secret);
 
   return token;
 };

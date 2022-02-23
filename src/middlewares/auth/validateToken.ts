@@ -2,7 +2,18 @@ import { NextFunction, Response, Request } from 'express';
 
 import jwt from 'jsonwebtoken';
 
-const validateToken = (
+import prismaClient from '../../database/prismaClient';
+import { User } from '../../interfaces';
+
+const getUser = async (username: string): Promise<User | null> => {
+  const user = await prismaClient.users.findFirst({
+    where: { username },
+  });
+
+  return user;
+};
+
+const validateToken = async (
   req: Request,
   res: Response,
   next: NextFunction,
@@ -18,7 +29,11 @@ const validateToken = (
     // Here, it's only out, for study reasons.
     const secret = 'mySuperSecret';
 
-    jwt.verify(token, secret);
+    const username = jwt.verify(token, secret);
+
+    const user = await getUser(username.toString());
+
+    req.tokenData = user;
 
     next();
   } catch (error) {
