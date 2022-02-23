@@ -16,7 +16,7 @@ const errorHandler = (
   const returnResponse: ObjectError = {
     error: `Something went wrong: ${error.message}`,
   };
-  return res.status(500).json(returnResponse);
+  return res.status(422).json(returnResponse);
 };
 
 export default errorHandler;

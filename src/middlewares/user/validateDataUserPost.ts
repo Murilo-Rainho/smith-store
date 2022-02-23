@@ -5,23 +5,24 @@ import joi from 'joi';
 const userDataSchema = joi.object({
   username: joi.string().min(3).required().messages({
     'string.base': 'Username must be a string',
-    'string.required': 'Username is required',
     'string.min': 'Username must be longer than 2 characters',
+    'any.required': 'Username is required',
   }),
   classe: joi.string().min(3).required().messages({
     'string.base': 'Classe must be a string',
-    'string.required': 'Classe is required',
     'string.min': 'Classe must be longer than 2 characters',
+    'any.required': 'Classe is required',
   }),
-  level: joi.number().min(1).required().messages({
-    'number.base': 'Level must be a number',
-    'number.required': 'Level is required',
-    'number.min': 'Level must be greater than 0',
-  }),
+  level: joi.number().strict().min(1).required()
+    .messages({
+      'number.base': 'Level must be a number',
+      'number.min': 'Level must be greater than 0',
+      'any.required': 'Level is required',
+    }),
   password: joi.string().min(8).required().messages({
     'string.base': 'Password must be a string',
-    'string.required': 'Password is required',
     'string.min': 'Password must be longer than 7 characters',
+    'any.required': 'Password is required',
   }),
 });
 
