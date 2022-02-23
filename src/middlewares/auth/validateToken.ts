@@ -13,6 +13,10 @@ const getUser = async (username: string): Promise<User | null> => {
   return user;
 };
 
+// this usually stays in the environment variables.
+// Here, it's only out, for study reasons.
+const secret = 'mySuperSecret';
+
 const validateToken = async (
   req: Request,
   res: Response,
@@ -25,15 +29,13 @@ const validateToken = async (
       return res.status(401).json({ error: 'Token not found' });
     }
 
-    // this usually stays in the environment variables.
-    // Here, it's only out, for study reasons.
-    const secret = 'mySuperSecret';
-
     const username = jwt.verify(token, secret);
 
     const user = await getUser(username.toString());
 
-    req.tokenData = user;
+    if (user) {
+      req.tokenData = user;
+    }
 
     next();
   } catch (error) {
